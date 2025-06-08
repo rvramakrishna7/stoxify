@@ -27,7 +27,7 @@ function HeroSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:8080/signup", inputValue, {
+      const { data } = await axios.post("https://stoxify-c63v.onrender.com/signup", inputValue, {
         withCredentials: true,
       });
 

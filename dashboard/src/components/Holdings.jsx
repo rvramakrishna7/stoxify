@@ -8,7 +8,7 @@ const Holdings = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/allHoldings")
+    axios.get("https://stoxify-c63v.onrender.com/allHoldings")
       .then((res) => {
         setAllHoldings(res.data);
         setLoading(false);

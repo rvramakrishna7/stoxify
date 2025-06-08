@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/verify-user", { withCredentials: true })
+      .get("https://stoxify-c63v.onrender.com/verify-user", { withCredentials: true })
       .then((res) => {
         if (res.data.success) {
           setIsAuth(true);

@@ -5,7 +5,7 @@ const Positions = () => {
   const [allPositions, setallPositions] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8080/allPositions")
+      .get("https://stoxify-c63v.onrender.com/allPositions")
       .then((res) => setallPositions(res.data));
   }, []);
   return (

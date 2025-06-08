@@ -18,7 +18,7 @@ const Menu = () => {
       setUsername(savedUsername);
     } else {
       axios
-        .get("http://localhost:8080/verify-user", { withCredentials: true })
+        .get("https://stoxify-c63v.onrender.com/verify-user", { withCredentials: true })
         .then((res) => {
           if (res.data.success) {
             setUsername(res.data.user.username);
@@ -46,7 +46,7 @@ const Menu = () => {
 
   const Logout = async () => {
   try {
-    await axios.post("http://localhost:8080/logout", {}, { withCredentials: true });
+    await axios.post("https://stoxify-c63v.onrender.com/logout", {}, { withCredentials: true });
     removeCookie("token", { path: "/" });
     localStorage.removeItem("username");
     navigate("/login", { replace: true });
