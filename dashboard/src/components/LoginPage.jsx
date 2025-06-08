@@ -92,7 +92,7 @@ function Login() {
           <button type="submit" className="btn btn-primary w-100">Login</button>
                  <p className="text-muted my-5 text-center mt-2">
                 Don't have an account?
-                <Link className="text-decoration-none" to={"http://localhost:5174/signup"}> Signup</Link>
+                <Link className="text-decoration-none" to={"https://stoxify-f3um.onrender.com/signup"}> Signup</Link>
               </p>
         </form>
           <ToastContainer />

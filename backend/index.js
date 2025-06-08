@@ -19,7 +19,7 @@ const uri = process.env.MONGO_ATLAS_DB_URL || process.env.LOCAL_MONGODB_URL;
 
 app.use(
   cors({
-    origin: ["http://localhost:5174", "https://stoxify-dashboard.onrender.com"],
+    origin: ["https://stoxify-f3um.onrender.com", "https://stoxify-dashboard.onrender.com"],
     credentials: true,
   })
 );
