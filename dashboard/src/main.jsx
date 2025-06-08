@@ -5,7 +5,7 @@ import { CookiesProvider } from "react-cookie";
 
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/Dashboard";
-import Login from "../../frontend/src/components/Login/LoginPage";
+import Login from "./components/LoginPage";
 
 
 createRoot(document.getElementById("root")).render(
