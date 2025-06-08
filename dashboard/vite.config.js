@@ -7,5 +7,9 @@ export default defineConfig({
     host:true,
     port:5173,
   },
+  preview: {
+    allowedHosts: ['stoxify-dashboard.onrender.com'],
+    port: 4173,
+  },
   plugins: [react()],
 })
