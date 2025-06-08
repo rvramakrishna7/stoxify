@@ -11,7 +11,6 @@ const authRoute = require("./Routes/AuthRoute");
 
 const app = express();
 const port = 8080;
-const ejs = require('ejs');
 const path = require('path');
 const PORT = process.env.PORT || port;
 const uri = process.env.MONGO_ATLAS_DB_URL || process.env.LOCAL_MONGODB_URL;
@@ -29,7 +28,7 @@ app.use(cookieParser());
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,'public')));
 app.set("views",(path.join(__dirname,'views')));
-app.use("/", authRoute);
+app.use("https://stoxify-c63v.onrender.com/", authRoute);
 
 app.listen(PORT, () => {
   console.log(`server is listening on ${PORT}`);

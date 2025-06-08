@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
   const [inputValue, setInputValue] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const { username, password } = inputValue;
@@ -53,7 +53,7 @@ function Login() {
     }
     setInputValue({
       ...inputValue,
-      email: "",
+      username: "",
       password: "",
     });
     
