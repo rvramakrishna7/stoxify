@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,'public')));
 app.set("views",(path.join(__dirname,'views')));
-app.use("https://stoxify-c63v.onrender.com/", authRoute);
+app.use("/", authRoute);
 
 app.listen(PORT, () => {
   console.log(`server is listening on ${PORT}`);
