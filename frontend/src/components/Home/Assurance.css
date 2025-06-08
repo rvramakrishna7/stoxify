@@ -1,0 +1,8 @@
+/* Assurance.css */
+.icon-link-hover svg {
+  transition: transform 0.2s ease;
+}
+
+.icon-link-hover:hover svg {
+  transform: translateX(5px);
+}

@@ -1,0 +1,26 @@
+.link-hover svg {
+  transition: transform 0.2s ease;
+}
+.link-hover:hover svg {
+  transform: translateX(5px);
+}
+
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+.icon-container {
+  width: 48px;
+  min-width: 48px;
+  max-height: 48px;
+}
+.icon-container img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}

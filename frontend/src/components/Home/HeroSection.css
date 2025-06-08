@@ -1,0 +1,14 @@
+/* HeroSection.css */
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.01);
+}
