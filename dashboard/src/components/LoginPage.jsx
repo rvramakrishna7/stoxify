@@ -62,7 +62,7 @@ function Login() {
         <div className="container d-flex justify-content-center align-items-center vh-100 mt-0">
       <div className="card shadow p-4" style={{ width: '100%', maxWidth: '400px' }}>
         <h3 className="text-center mb-4">Login</h3>
-        <form onSubmit={handleSubmit} className="needs-validation" novalidate>
+        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">Username</label>
             <input
