@@ -43,7 +43,7 @@ function Login() {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "http://localhost:5173/";
+          window.location.href = "https://stoxify-dashboard.onrender.com";
         }, 1000);
       } else {
         handleError(message);

@@ -36,7 +36,7 @@ function HeroSection() {
         handleSuccess(message);
         localStorage.setItem("username", data.user.username);
         setTimeout(() => {
-          window.location.href = "http://localhost:5173/";
+          window.location.href = "https://stoxify-dashboard.onrender.com";
         }, 1000);
       } else {
         handleError(message);
