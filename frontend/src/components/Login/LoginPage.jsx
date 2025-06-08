@@ -40,18 +40,34 @@ function Login() {
         { withCredentials: true }
       );
       console.log(data);
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        setTimeout(() => {
-          window.location.href = "https://stoxify-dashboard.onrender.com";
-        }, 1000);
-      } else {
-        handleError(message);
-      }
-    } catch (error) {
-      console.log(error);
+      if (data.success) {
+      toast.success(data.message);
+      setTimeout(() => {
+        window.location.href = "https://stoxify-dashboard.onrender.com";
+      }, 1000);
+    } else {
+      toast.error(data.message || "Login failed");
     }
+
+  } catch (error) {
+    console.log("Login error:", error);
+    toast.error("Something went wrong. Please try again.");
+  }
+      
+
+
+    //   const { success, message } = data;
+    //   if (success) {
+    //     handleSuccess(message);
+    //     setTimeout(() => {
+    //       window.location.href = "https://stoxify-dashboard.onrender.com";
+    //     }, 1000);
+    //   } else {
+    //     handleError(message);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
     setInputValue({
       ...inputValue,
       username: "",
