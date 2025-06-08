@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroSection from './HeroSection';
-import Ticket from './ticket';
+import Ticket from './Ticket';
 
 
 
