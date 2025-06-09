@@ -77,7 +77,8 @@ const Menu = () => {
       );
       removeCookie("token", { path: "/" });
       localStorage.removeItem("username");
-      navigate("/https://stoxify-f3um.onrender.com", { replace: true });
+      window.location.replace("https://stoxify-f3um.onrender.com");
+
     } catch (err) {
       console.error("Logout failed", err);
       navigate("/login", { replace: true });
