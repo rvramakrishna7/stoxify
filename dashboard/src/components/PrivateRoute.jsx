@@ -27,7 +27,7 @@ const PrivateRoute = ({ children }) => {
   }, [navigate]);
 
   if (isAuth === null) {
-    // While checking, show a loading spinner
+   
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div className="spinner-border text-primary" role="status">
