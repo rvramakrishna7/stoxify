@@ -1,8 +1,9 @@
-// const User = require("../models/UserModel");
+const User = require("../models/UserModel");
 const { createSecretToken } = require("../utils/SecretToken");
 const bcrypt = require("bcryptjs");
 
 // Signup Controller
+
 module.exports.Signup = async (req, res) => {
   try {
     const { email, password, username, createdAt } = req.body;
@@ -15,17 +16,20 @@ module.exports.Signup = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "None",
-      secure: true, // Use secure cookies on HTTPS
+      secure: false, // Set secure:true if you use HTTPS
     });
     return res.status(201).json({ message: "User signed in successfully", success: true, user });
-    // Removed next() to avoid "headers already sent" errors
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Server error", success: false });
+    console.error("Signup controller error:", error);
+    return res.status(500).json({ message: "Internal server error", success: false });
   }
 };
 
 // Login Controller
+const User = require("../models/UserModel");
+const { createSecretToken } = require("../utils/SecretToken");
+const bcrypt = require("bcryptjs");
+
 module.exports.Login = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -44,11 +48,11 @@ module.exports.Login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "None",
-      secure: true, // Use secure cookies on HTTPS
+      secure: false, // Set secure:true if your domain uses HTTPS
     });
     return res.status(200).json({ message: "User logged in successfully", success: true });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Server error", success: false });
+    console.error("Login controller error:", error);
+    return res.status(500).json({ message: "Internal server error", success: false });
   }
 };
