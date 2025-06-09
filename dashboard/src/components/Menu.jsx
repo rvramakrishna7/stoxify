@@ -80,7 +80,7 @@ const Menu = () => {
       navigate("/login", { replace: true });
     } catch (err) {
       console.error("Logout failed", err);
-      navigate("/login", { replace: true });
+      navigate("https://stoxify-f3um.onrender.com", { replace: true });
     }
   };
 
