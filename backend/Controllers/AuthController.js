@@ -26,9 +26,6 @@ module.exports.Signup = async (req, res) => {
 };
 
 // Login Controller
-const User = require("../models/UserModel");
-const { createSecretToken } = require("../utils/SecretToken");
-const bcrypt = require("bcryptjs");
 
 module.exports.Login = async (req, res) => {
   try {
