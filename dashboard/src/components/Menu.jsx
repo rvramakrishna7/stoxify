@@ -46,7 +46,7 @@ const Menu = () => {
 
   const Logout = async () => {
   try {
-    await axios.post("https://stoxify-c63v.onrender.com/logout", {}, { withCredentials: true });
+    await axios.post("https://stoxify-c63v.onrender.com/logout", {}, { withCredentials: true }).then(() => navigate("/login", { replace: true }));;
     removeCookie("token", { path: "/" });
     localStorage.removeItem("username");
     navigate("/login", { replace: true });

@@ -24,30 +24,49 @@ function HeroSection() {
   const handleSuccess = (msg) =>
     toast.success(msg, { position: "bottom-right" });
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const { data } = await axios.post("https://stoxify-c63v.onrender.com/signup", inputValue, {
+  //       withCredentials: true,
+  //     });
+
+  //     const { success, message } = data;
+  //     if (success) {
+  //       handleSuccess(message);
+  //       localStorage.setItem("username", data.user.username);
+  //       setTimeout(() => {
+  //         window.location.href = "https://stoxify-dashboard.onrender.com";
+  //       }, 1000);
+  //     } else {
+  //       handleError(message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     handleError("Signup failed. Please try again.");
+  //   }
+
+
+  //   setInputValue({ email: "", password: "", username: "" });
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post("https://stoxify-c63v.onrender.com/signup", inputValue, {
-        withCredentials: true,
-      });
-
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        localStorage.setItem("username", data.user.username);
-        setTimeout(() => {
-          window.location.href = "https://stoxify-dashboard.onrender.com";
-        }, 1000);
-      } else {
-        handleError(message);
-      }
-    } catch (error) {
-      console.log(error);
-      handleError("Signup failed. Please try again.");
-    }
-
-    setInputValue({ email: "", password: "", username: "" });
-  };
+  e.preventDefault();
+  try {
+    const { data } = await axios.post(
+      "https://stoxify-c63v.onrender.com/login",
+      inputValue,
+      { withCredentials: true }
+    );
+    if (data.success) {
+      toast.success(data.message);
+      setTimeout(() => window.location.href = "https://stoxify-dashboard.onrender.com", 1000);
+    } else toast.error(data.message);
+  } catch (err) {
+    toast.error("Network or server error");
+  }
+  setInputValue({ email: "", password: "", username: "" });
+};
 
   return (
     <div className="container py-5 my-3">
