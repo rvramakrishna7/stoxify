@@ -12,6 +12,7 @@ const authRoute = require("./Routes/AuthRoute");
 
 const app = express();
 const port = 8080;
+app.set("trust proxy", true);
 const PORT = process.env.PORT || port;
 const uri = process.env.MONGO_ATLAS_DB_URL || process.env.LOCAL_MONGODB_URL;
 
