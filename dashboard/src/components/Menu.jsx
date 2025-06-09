@@ -77,10 +77,10 @@ const Menu = () => {
       );
       removeCookie("token", { path: "/" });
       localStorage.removeItem("username");
-      navigate("/login", { replace: true });
+      navigate("/https://stoxify-f3um.onrender.com", { replace: true });
     } catch (err) {
       console.error("Logout failed", err);
-      navigate("https://stoxify-f3um.onrender.com", { replace: true });
+      navigate("/login", { replace: true });
     }
   };
 
