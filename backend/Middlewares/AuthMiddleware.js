@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports.userVerification = async (req, res) => {
   const token = req.cookies.token;
+  console.log("AuthMiddleware – token received:", token);
   if (!token) {
     return res
       .status(401)
@@ -24,6 +25,7 @@ module.exports.userVerification = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
   } catch (err) {
+    console.error("Error in token verification:", err);
     return res
       .status(401)
       .json({ success: false, message: "Invalid token" });

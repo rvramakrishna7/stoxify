@@ -4,15 +4,15 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const authRoute = require("./Routes/AuthRoute");
 
 const HoldingsModel = require("./models/HoldingsModel");
 const OrdersModel = require("./models/OrdersModel");
 const PositionsModel = require("./models/PositionsModel");
-const authRoute = require("./Routes/AuthRoute");
 
 const app = express();
-const port = 8080;
 app.set("trust proxy", true);
+const port = 8080;
 const PORT = process.env.PORT || port;
 const uri = process.env.MONGO_ATLAS_DB_URL || process.env.LOCAL_MONGODB_URL;
 
@@ -35,20 +35,23 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, 'public')));
-app.set("views", path.join(__dirname, 'views'));
 app.use("/", authRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
 
-// Database Connection
 mongoose
   .connect(uri)
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err));
+  
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, 'public')));
+app.set("views", path.join(__dirname, 'views'));
+
+
+// Database Connection
 
 // Additional routes
 app.get("/", (req, res) => {
