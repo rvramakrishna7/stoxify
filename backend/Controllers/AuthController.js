@@ -1,57 +1,54 @@
-const User = require("../models/UserModel");
+// const User = require("../models/UserModel");
 const { createSecretToken } = require("../utils/SecretToken");
 const bcrypt = require("bcryptjs");
 
-module.exports.Signup = async (req, res, next) => {
+// Signup Controller
+module.exports.Signup = async (req, res) => {
   try {
     const { email, password, username, createdAt } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.json({ message: "User already exists" });
+      return res.status(400).json({ message: "User already exists", success: false });
     }
     const user = await User.create({ email, password, username, createdAt });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "None",
-      secure: false,
+      secure: true, // Use secure cookies on HTTPS
     });
-    res
-      .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
-    next();
+    return res.status(201).json({ message: "User signed in successfully", success: true, user });
+    // Removed next() to avoid "headers already sent" errors
   } catch (error) {
     console.error(error);
+    return res.status(500).json({ message: "Server error", success: false });
   }
 };
 
-
-
-module.exports.Login = async (req, res, next) => {
+// Login Controller
+module.exports.Login = async (req, res) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
-      return res.json({ message: "All fields are required" });
+      return res.status(400).json({ message: "All fields are required", success: false });
     }
     const user = await User.findOne({ username });
     if (!user) {
-      return res.json({ message: "Incorrect password or username" });
+      return res.status(401).json({ message: "Incorrect password or username", success: false });
     }
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      return res.json({ message: "Incorrect password or username" });
+      return res.status(401).json({ message: "Incorrect password or username", success: false });
     }
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "None",
-      secure: false,
+      secure: true, // Use secure cookies on HTTPS
     });
-    return res
-      .status(201)
-      .json({ message: "User logged in successfully", success: true });
-    
+    return res.status(200).json({ message: "User logged in successfully", success: true });
   } catch (error) {
     console.error(error);
+    return res.status(500).json({ message: "Server error", success: false });
   }
 };

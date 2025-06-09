@@ -1,8 +1,9 @@
-require("dotenv").config();
+// require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 const HoldingsModel = require("./models/HoldingsModel");
 const OrdersModel = require("./models/OrdersModel");
@@ -11,9 +12,9 @@ const authRoute = require("./Routes/AuthRoute");
 
 const app = express();
 const port = 8080;
-const path = require('path');
 const PORT = process.env.PORT || port;
 const uri = process.env.MONGO_ATLAS_DB_URL || process.env.LOCAL_MONGODB_URL;
+
 const allowedOrigins = [
   "https://stoxify-f3um.onrender.com",
   "https://stoxify-dashboard.onrender.com",
@@ -21,24 +22,25 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow requests with no origin (e.g. mobile apps or curl requests)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true
+  credentials: true,
 }));
 
 app.use(express.json());
 app.use(cookieParser());
-app.set("view engine","ejs");
-app.use(express.static(path.join(__dirname,'public')));
-app.set("views",(path.join(__dirname,'views')));
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, 'public')));
+app.set("views", path.join(__dirname, 'views'));
 app.use("/", authRoute);
 
 app.listen(PORT, () => {
-  console.log(`server is listening on ${PORT}`);
+  console.log(`Server is listening on ${PORT}`);
 });
 
 // Database Connection
