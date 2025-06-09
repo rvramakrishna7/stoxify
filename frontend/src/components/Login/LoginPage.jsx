@@ -4,6 +4,11 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
+const [inputValue, setInputValue] = useState({
+    username: "",
+    password: "",
+  });
+  const { username, password } = inputValue;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
