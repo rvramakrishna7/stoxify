@@ -31,14 +31,12 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting login with:", inputValue);
     try {
       const { data } = await axios.post(
         "https://stoxify-c63v.onrender.com/login",
         { ...inputValue },
         { withCredentials: true }
       );
-      console.log("Login response data:", data);
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
@@ -49,7 +47,6 @@ function Login() {
         handleError(message);
       }
     } catch (error) {
-      console.log("Login error:", error);
       handleError("Network or server error");
     }
     setInputValue({
@@ -102,94 +99,3 @@ function Login() {
 }
 
 export default Login;
-
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import axios from "axios";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// function Login() {
-//   const [inputValue, setInputValue] = useState({
-//     username: "",
-//     password: "",
-//   });
-//   const {username, password} = inputValue;
-//   const handleOnChange = (e) => {
-//     setInputValue({
-//       ...inputValue,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const { data } = await axios.post(
-//         "https://stoxify-c63v.onrender.com/login",
-//         inputValue,
-//         { withCredentials: true }
-//       );
-
-//       if (data.success) {
-//         toast.success(data.message);
-//         setTimeout(() => {
-//           window.location.href = "https://stoxify-dashboard.onrender.com";
-//         }, 1000);
-//       } else {
-//         toast.error(data.message || "Login failed");
-//       }
-//     } catch (error) {
-//       console.error("Login error:", error);
-//       toast.error("Something went wrong. Please try again.");
-//     }
-
-//     setInputValue({ username: "", password: "" });
-//   };
-
-//   return (
-//     <div className="container d-flex justify-content-center align-items-center vh-100">
-//       <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
-//         <h3 className="text-center mb-4">Login</h3>
-//         <form onSubmit={handleSubmit} noValidate>
-//           <div className="mb-3">
-//             <label htmlFor="username" className="form-label">Username</label>
-//             <input
-//               type="text"
-//               className="form-control"
-//               id="username"
-//               name="username"
-//               value={inputValue.username}
-//               onChange={handleOnChange}
-//               required
-//               placeholder="Enter your username"
-//             />
-//           </div>
-//           <div className="mb-3">
-//             <label htmlFor="password" className="form-label">Password</label>
-//             <input
-//               type="password"
-//               className="form-control"
-//               id="password"
-//               name="password"
-//               value={inputValue.password}
-//               onChange={handleOnChange}
-//               required
-//               placeholder="Enter your password"
-//             />
-//           </div>
-//           <button type="submit" className="btn btn-primary w-100">Login</button>
-//           <p className="text-muted my-5 text-center mt-2">
-//             Don't have an account?{" "}
-//             <Link className="text-decoration-none" to="/signup">
-//               Signup
-//             </Link>
-//           </p>
-//         </form>
-//         <ToastContainer />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;

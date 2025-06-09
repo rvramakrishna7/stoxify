@@ -75,7 +75,7 @@ function Ticket() {
   const chunkedSections = chunkArray(sections, 3);
 
   return (
-    <div className="container py-5">
+    <div className="container py-5 mt-3">
       <div className="mx-auto" style={{ maxWidth: "1140px" }}>
         <h4 className="text-muted mb-5">
           To create a ticket, select a relevant topic

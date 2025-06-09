@@ -23,7 +23,6 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (e.g. mobile apps or curl requests)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -41,6 +40,7 @@ app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
 
+// Database Connection
 mongoose
   .connect(uri)
   .then(() => console.log("DB connected"))
@@ -51,7 +51,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set("views", path.join(__dirname, 'views'));
 
 
-// Database Connection
 
 // Additional routes
 app.get("/", (req, res) => {

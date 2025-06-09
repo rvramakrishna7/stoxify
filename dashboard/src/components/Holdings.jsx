@@ -23,7 +23,6 @@ const Holdings = () => {
   
   useEffect(() => {
     if (allHoldings.length > 0) {
-      console.log("Holdings data:", allHoldings);
     }
   }, [allHoldings]);
 
