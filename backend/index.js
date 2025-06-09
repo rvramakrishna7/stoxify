@@ -14,14 +14,21 @@ const port = 8080;
 const path = require('path');
 const PORT = process.env.PORT || port;
 const uri = process.env.MONGO_ATLAS_DB_URL || process.env.LOCAL_MONGODB_URL;
+const allowedOrigins = [
+  "https://stoxify-f3um.onrender.com",
+  "https://stoxify-dashboard.onrender.com",
+];
 
-
-app.use(
-  cors({
-    origin: ["https://stoxify-f3um.onrender.com", "https://stoxify-dashboard.onrender.com"],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());

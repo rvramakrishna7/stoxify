@@ -4,100 +4,51 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
-  const [inputValue, setInputValue] = useState({
-    username: "",
-    password: "",
-  });
-  const { username, password } = inputValue;
-
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
-  };
-
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-left",
-    });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("form submitted");
     try {
       const { data } = await axios.post(
         "https://stoxify-c63v.onrender.com/login",
-        inputValue,
+        {
+          ...inputValue,
+        },
         { withCredentials: true }
       );
+      console.log(data);
       if (data.success) {
-        toast.success(data.message);
-        setTimeout(
-          () =>
-            (window.location.href = "https://stoxify-dashboard.onrender.com"),
-          1000
-        );
-      } else toast.error(data.message);
-    } catch (err) {
-      toast.error("Network or server error");
-    } finally {
-      setInputValue({
-        ...inputValue,
-        username: "",
-        password: "",
-      });
+      toast.success(data.message);
+      setTimeout(() => {
+        window.location.href = "https://stoxify-dashboard.onrender.com";
+      }, 1000);
+    } else {
+      toast.error(data.message || "Login failed");
     }
-  };
+  } catch (error) {
+    console.log("Login error:", error);
+    toast.error("Something went wrong. Please try again.");
+  }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log("form submitted");
-  //   try {
-  //     const { data } = await axios.post(
-  //       "https://stoxify-c63v.onrender.com/login",
-  //       {
-  //         ...inputValue,
-  //       },
-  //       { withCredentials: true }
-  //     );
-  //     console.log(data);
-  //     if (data.success) {
-  //     toast.success(data.message);
-  //     setTimeout(() => {
-  //       window.location.href = "https://stoxify-dashboard.onrender.com";
-  //     }, 1000);
-  //   } else {
-  //     toast.error(data.message || "Login failed");
-  //   }
-  // } catch (error) {
-  //   console.log("Login error:", error);
-  //   toast.error("Something went wrong. Please try again.");
-  // }
-
-  // try {
-  //   const { success, message } = data;
-  //   if (success) {
-  //     handleSuccess(message);
-  //     setTimeout(() => {
-  //       window.location.href = "https://stoxify-dashboard.onrender.com";
-  //     }, 1000);
-  //   } else {
-  //     handleError(message);
-  //   }
-  // } catch (error) {
-  //   console.log(error);
-  // }
-  // setInputValue({
-  //   ...inputValue,
-  //   username: "",
-  //   password: "",
-  // });
-
+  try {
+    const { success, message } = data;
+    if (success) {
+      handleSuccess(message);
+      setTimeout(() => {
+        window.location.href = "https://stoxify-dashboard.onrender.com";
+      }, 1000);
+    } else {
+      handleError(message);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  setInputValue({
+    ...inputValue,
+    username: "",
+    password: "",
+  });
+  }
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100 mt-0">
       <div
