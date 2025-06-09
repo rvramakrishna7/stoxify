@@ -11,29 +11,31 @@ router.post("/logout", (req, res) => {
   res.clearCookie("token", { sameSite: "None", secure: true });
   res.status(200).json({ success: true });
 });
+router.get("/verify-user", userVerification);
 
-router.get("/verify-user", async (req, res) => {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json({ success: false, message: "Unauthorized" });
-  }
+// /verify-user route for checking authentication
+// router.get("/verify-user", async (req, res) => {
+//   const token = req.cookies.token;
+//   if (!token) {
+//     return res.status(401).json({ success: false, message: "Unauthorized" });
+//   }
 
-  try {
-    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-    const user = await User.findById(decoded.id).select("username");
+//   try {
+//     const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+//     const user = await User.findById(decoded.id).select("username");
 
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "User not found" });
-    }
+//     if (!user) {
+//       return res.status(401).json({ success: false, message: "User not found" });
+//     }
 
-    return res
-      .status(200)
-      .json({ success: true, user: { username: user.username } });
-  } catch (err) {
-    return res.status(401).json({ success: false, message: "Invalid token" });
-  }
-});
+//     return res
+//       .status(200)
+//       .json({ success: true, user: { username: user.username } });
+//   } catch (err) {
+//     return res
+//       .status(401)
+//       .json({ success: false, message: "Invalid token" });
+//   }
+// });
 
 module.exports = router;

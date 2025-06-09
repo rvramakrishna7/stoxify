@@ -16,7 +16,7 @@ module.exports.Signup = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "None",
-      secure: false, // Set secure:true if you use HTTPS
+      secure: true, // Set secure:true if you use HTTPS
     });
     return res.status(201).json({ message: "User signed in successfully", success: true, user });
   } catch (error) {
@@ -45,7 +45,7 @@ module.exports.Login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "None",
-      secure: false, // Set secure:true if your domain uses HTTPS
+      secure: true, // Set secure:true if your domain uses HTTPS
     });
     return res.status(200).json({ message: "User logged in successfully", success: true });
   } catch (error) {
